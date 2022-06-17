@@ -1,10 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DiscoverComponent } from './discover/discover.component';
+import { ProfileComponent } from './profile/profile.component';
+import { WatchlistComponent } from './watchlist/watchlist.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component: DiscoverComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'discover', component: DiscoverComponent },
+  { path: 'watchlist', component: WatchlistComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
