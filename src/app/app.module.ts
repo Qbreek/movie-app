@@ -4,16 +4,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 
 import { DiscoverComponent } from './discover/discover.component';
 import { ProfileComponent } from './profile/profile.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { MoviesComponent } from './movies/movies.component';
+import { MovieListComponent } from './movies/movie-list/movie-list.component';
+import { MovieItemComponent } from './movies/movie-list/movie-item/movie-item.component';
 
 @NgModule({
   declarations: [
@@ -22,16 +26,20 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     ProfileComponent,
     WatchlistComponent,
     NavBarComponent,
+    MoviesComponent,
+    MovieListComponent,
+    MovieItemComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
     MatIconModule,
     MatButtonModule,
     MatInputModule,
     MatSidenavModule,
+    MatListModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
