@@ -1,14 +1,22 @@
 <nav>
-  <a mat-stroked-button routerLink="/profile">
-    Profile
-    <mat-icon>person</mat-icon>
-  </a>
-  <a mat-stroked-button routerLink="/discover">
-    Discover
-    <mat-icon>explore</mat-icon>
-  </a>
-  <a mat-stroked-button routerLink="/watchlist">
-    Watchlist
-    <mat-icon>movie</mat-icon>
-  </a>
+  <mat-list>
+    <mat-list-item routerLinkActive="active">
+      <a mat-stroked-button routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </a>
+    </mat-list-item>
+    <mat-list-item>
+      <a mat-stroked-button routerLink="/discover">
+        <mat-icon>explore</mat-icon>
+        <span>Discover</span>
+      </a>
+    </mat-list-item>
+    <mat-list-item>
+      <a mat-stroked-button routerLink="/watchlist">
+        <mat-icon>movie</mat-icon>
+        <span>Watchlist</span>
+      </a>
+    </mat-list-item>
+  </mat-list>
 </nav>
