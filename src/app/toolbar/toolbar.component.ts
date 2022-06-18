@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MoviesService } from '../movies/movies.service';
 
 @Component({
@@ -6,8 +7,9 @@ import { MoviesService } from '../movies/movies.service';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.sass'],
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit, OnDestroy {
   constructor(private moviesService: MoviesService) {}
+  sub: Subscription;
 
   ngOnInit(): void {
     this.moviesService.loadDummy();
@@ -18,4 +20,6 @@ export class ToolbarComponent implements OnInit {
       this.moviesService.getMovie(searchValue);
     }
   }
+
+  ngOnDestroy(): void {}
 }
