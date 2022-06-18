@@ -2,57 +2,44 @@
     display: flex
     flex-direction: column
     width: 250px
+    height: 500px
     margin: 10px 10px
     background-color: #181818
     transition: background-color 200ms linear
 
 .mat-card:hover
     background-color: #282828
-    cursor: pointer
 
-.mat-card-title
-    padding-top: 15px
+.unclicked
+    .mat-card-title
+        padding-top: 15px
 
-.mat-card-actions
-    display: flex
-    justify-content: center
-    gap: 30px
+    .mat-card-actions
+        display: flex
+        justify-content: center
+        margin-top: 10px
+        gap: 30px
 
-img
-    width: 250px
-    height: 350px
+    img
+        width: 250px
+        height: 350px
 
-span
-    display: inline-flex
-    align-items: center
-    gap: 5px
+    span
+        display: inline-flex
+        align-items: center
+        gap: 5px
 
-.star-icon
-    color: yellow
-    transform: scale(0.8)
+    .star-icon
+        color: yellow
+        transform: scale(0.8)
 
-// .movie-info
-//     display: flex
-//     flex-direction: column
-//     gap: 10px
+.clicked
+    .mat-card-title
+        height: 50px
 
-// .movie-details
-//     display: flex
-//     justify-content: space-evenly
-//     gap: 15px
-//     padding: 0
-//     margin: 0
+    .mat-card-subtitle
+        display: flex
+        gap: 20px
 
-//     li
-//         list-style: none
-
-// .mat-card-content
-//     margin-top: 10px
-//     margin-bottom: 10px
-
-//     p
-//         font-size: large
-
-// .mat-card-subtitle
-//     margin-bottom: 0
-//     padding: 0
+    h3
+        margin-top: 20px

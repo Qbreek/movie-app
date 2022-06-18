@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Movie } from 'src/shared/movie.model';
+import { Movie } from 'src/app/shared/movie.model';
 
 @Component({
   selector: 'app-movie-item',
@@ -8,7 +8,12 @@ import { Movie } from 'src/shared/movie.model';
 })
 export class MovieItemComponent implements OnInit {
   @Input() movie: Movie;
+  movieClicked = false;
   constructor() {}
 
   ngOnInit(): void {}
+
+  onMovieClicked() {
+    this.movieClicked = !this.movieClicked;
+  }
 }

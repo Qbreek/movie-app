@@ -1,34 +1,42 @@
-<li>
+<li (click)="onMovieClicked()">
   <mat-card>
-    <img [src]="movie.poster" alt="" />
-    <div class="movie-info">
-      <mat-card-title>{{ movie.title }}</mat-card-title>
-      <!-- <mat-card-subtitle> -->
-      <!-- <ul class="movie-details">
-        <li><p>2017</p></li>
-        <li><p>136 min</p></li> -->
-      <!-- <li><p>Action, Adventure, Comedy</p></li> -->
-      <!-- </ul> -->
-      <!-- <p><b>Director</b> : James Gunn</p>
-      <p><b>Actors</b> : Chris Pratt, Zoe Saldana, Dave Bautista</p> -->
-      <span>
-        <mat-icon class="star-icon">star</mat-icon>
-        {{ movie.rating }}
-      </span>
-      <!-- </mat-card-subtitle> -->
-      <!-- <mat-divider inset></mat-divider> -->
-      <!-- <mat-card-content>
-      <p>
-        The Guardians struggle to keep together as a team while dealing with
-        their personal family issues, notably Star-Lord's encounter with his
-        father the ambitious celestial being Ego.
-      </p>
-    </mat-card-content> -->
+    <div *ngIf="!movieClicked" class="unclicked">
+      <img [src]="movie.poster" alt="" />
+      <div class="movie-info">
+        <mat-card-title>
+          {{ movie.title | trimOver20Char }}
+        </mat-card-title>
+        <span>
+          <mat-icon class="star-icon">star</mat-icon>
+          {{ movie.rating }}
+        </span>
+      </div>
+      <mat-divider inset></mat-divider>
+      <mat-card-actions>
+        <button mat-fab color="primary">
+          <mat-icon>movie</mat-icon>
+        </button>
+      </mat-card-actions>
     </div>
-    <mat-divider inset></mat-divider>
-    <mat-card-actions>
-      <button mat-fab color="primary"><mat-icon>favorite</mat-icon></button>
-      <button mat-fab color="primary"><mat-icon>movie</mat-icon></button>
-    </mat-card-actions>
+    <!--------------------------------------------------->
+    <div *ngIf="movieClicked" class="clicked">
+      <div class="movie-info">
+        <mat-card-title>{{ movie.title }}</mat-card-title>
+        <mat-card-subtitle>
+          <p>{{ movie.rating }} / 10</p>
+          <p>{{ movie.year }}</p>
+          <p>{{ movie.runtime }}</p>
+        </mat-card-subtitle>
+        <mat-card-content>
+          <p><b>Actors :</b> {{ movie.actors }}</p>
+          <p style="height: 50px">
+            <b>Directed by :</b>
+            {{ movie.director }}
+          </p>
+          <mat-divider inset></mat-divider>
+          <h3>{{ movie.plot }}</h3>
+        </mat-card-content>
+      </div>
+    </div>
   </mat-card>
 </li>
