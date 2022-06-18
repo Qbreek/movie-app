@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MoviesService } from '../movies/movies.service';
+import { MoviesService } from '../shared/movies.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -12,7 +12,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   sub: Subscription;
 
   ngOnInit(): void {
-    this.moviesService.loadDummy();
+    // this.moviesService.loadDummy();
   }
 
   onSearchMovie(searchValue: string) {
