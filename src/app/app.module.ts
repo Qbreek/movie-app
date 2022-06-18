@@ -23,6 +23,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieItemComponent } from './movies/movie-list/movie-item/movie-item.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { TrimOver20CharPipe } from './shared/trim-over20-char.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MovieListComponent,
     MovieItemComponent,
     ToolbarComponent,
+    TrimOver20CharPipe,
   ],
   imports: [
     BrowserModule,
