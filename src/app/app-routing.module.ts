@@ -5,7 +5,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 
 const routes: Routes = [
-  { path: '', component: DiscoverComponent },
+  {
+    path: '',
+    redirectTo: '/discover',
+    pathMatch: 'full',
+  },
   { path: 'profile', component: ProfileComponent },
   { path: 'discover', component: DiscoverComponent },
   { path: 'watchlist', component: WatchlistComponent },
