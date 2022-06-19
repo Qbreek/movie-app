@@ -1,5 +1,6 @@
 <li>
   <mat-card>
+    <!--------------------Movie not clicked------------------------------>
     <div *ngIf="!movieClicked" class="unclicked">
       <img
         [src]="movie.poster"
@@ -28,8 +29,7 @@
         </button>
       </mat-card-actions>
     </div>
-    <!--------------------------------------------------->
-
+    <!--------------------Movie clicked----------------------------------->
     <div *ngIf="movieClicked" class="clicked" (click)="onMovieClicked()">
       <div class="movie-info">
         <mat-card-title>{{ movie.title }}</mat-card-title>

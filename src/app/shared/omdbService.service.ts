@@ -1,51 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
-import { map } from 'rxjs';
+
+import { Subject, map } from 'rxjs';
 import { Movie } from 'src/app/shared/movie.model';
 
 @Injectable({ providedIn: 'root' })
 export class OmdbService {
-  movieSearch = [];
-  movieSearchUpdated = new Subject<boolean>(); //inform components of updated search list
-  movieSearchError = new Subject<boolean>();
-
-  //dummy movies for styling-------------
-  dummy = [
-    'the lighthouse',
-    'one flew over',
-    'the lord of the rings',
-    'fear and loathing in las vegas',
-    'harry potter',
-    'the matrix',
-  ];
-  loadDummy() {
-    this.dummy.forEach((dummy) => {
-      this.getMovie(dummy);
-    });
-  }
-  //--------------------------------------
+  private movieSearch: Movie[] = [];
+  movieSearchSuccessfullyCompleted = new Subject<boolean>(); //inform components of updated search list
 
   constructor(private http: HttpClient) {}
 
+  // get movie by title from OMDBapi
   getMovie(title: string) {
     this.http
       .get<any>(`http://www.omdbapi.com/?apikey=997675d2&t=${title}`)
       .pipe(
-        map((movieResponse) => {
-          const serverResponse = //OMDB api responds to wrong searches with {Response : 'True' or 'False}
-            movieResponse.Response === 'True' ? true : false;
-          if (serverResponse) {
+        map((omdbResponse) => {
+          const responseOK = omdbResponse.Response === 'True' ? true : false; //OMDB api responds to wrong searches with {Response : 'True' or 'False}
+          if (responseOK) {
             const movie = new Movie(
-              movieResponse.Title,
-              movieResponse.Plot,
-              movieResponse.Year,
-              movieResponse.Runtime,
-              movieResponse.Genre,
-              movieResponse.Director,
-              movieResponse.Actors,
-              movieResponse.imdbRating,
-              movieResponse.Poster
+              omdbResponse.Title,
+              omdbResponse.Plot,
+              omdbResponse.Year,
+              omdbResponse.Runtime,
+              omdbResponse.Genre,
+              omdbResponse.Director,
+              omdbResponse.Actors,
+              omdbResponse.imdbRating,
+              omdbResponse.Poster
             );
             return movie;
           } else {
@@ -53,20 +36,18 @@ export class OmdbService {
           }
         })
       )
-      .subscribe(
-        (movieResponse) => {
-          this.movieSearch.unshift(movieResponse);
-          this.movieSearchUpdated.next(true);
+      .subscribe({
+        next: (movieObject) => {
+          this.movieSearch.unshift(movieObject);
         },
-        (error) => {
+        error: (error) => {
           console.log(error);
-          this.movieSearchError.next(true);
+          this.movieSearchSuccessfullyCompleted.next(false);
         },
-        () => {
-          console.log('completed!');
-          console.log(this.movieSearch);
-        }
-      );
+        complete: () => {
+          this.movieSearchSuccessfullyCompleted.next(true);
+        },
+      });
   }
 
   getMovieSearch() {

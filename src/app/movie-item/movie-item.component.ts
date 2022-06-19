@@ -9,12 +9,13 @@ import { Movie } from 'src/app/shared/movie.model';
 export class MovieItemComponent implements OnInit {
   @Input() movie: Movie;
   movieClicked = false;
+
   constructor() {}
 
   ngOnInit(): void {}
 
   onMovieClicked() {
-    this.movieClicked = !this.movieClicked;
+    this.movieClicked = !this.movieClicked; //switch card to showcase poster or details
   }
 
   onAddToWatchlist() {}

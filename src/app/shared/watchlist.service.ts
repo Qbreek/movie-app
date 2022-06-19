@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+
 import { Movie } from './movie.model';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ import { Movie } from './movie.model';
 export class WatchlistService {
   constructor(private http: HttpClient) {}
 
+  //get watchlist from firebase
   getWatchlist() {
     return this.http
       .get<{ key: string; obj: Movie }>(
@@ -19,15 +21,7 @@ export class WatchlistService {
           let watchlistArray: Movie[] = [];
           for (let key in watchlistData) {
             const movie: Movie = {
-              title: watchlistData[key].title,
-              plot: watchlistData[key].plot,
-              year: watchlistData[key].year,
-              runtime: watchlistData[key].runtime,
-              genre: watchlistData[key].genre,
-              director: watchlistData[key].director,
-              actors: watchlistData[key].actors,
-              rating: watchlistData[key].rating,
-              poster: watchlistData[key].poster,
+              ...watchlistData[key],
               fbID: key,
             };
             watchlistArray.push(movie);

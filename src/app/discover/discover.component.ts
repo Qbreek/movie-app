@@ -15,9 +15,9 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   constructor(private omdbService: OmdbService) {}
 
   ngOnInit(): void {
-    this.searchList = this.omdbService.getMovieSearch();
-    this.movieSearchSubscription =
-      this.omdbService.movieSearchUpdated.subscribe(() => {
+    this.searchList = this.omdbService.getMovieSearch(); // get movie session stored movie search querry
+    this.movieSearchSubscription = // subscribe to changes on movie search in order to refresh page
+      this.omdbService.movieSearchSuccessfullyCompleted.subscribe(() => {
         this.searchList = this.omdbService.getMovieSearch();
       });
   }
