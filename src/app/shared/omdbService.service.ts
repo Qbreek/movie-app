@@ -5,12 +5,12 @@ import { map } from 'rxjs';
 import { Movie } from 'src/app/shared/movie.model';
 
 @Injectable({ providedIn: 'root' })
-export class MoviesService {
+export class OmdbService {
   movieSearch = [];
   movieSearchUpdated = new Subject<boolean>(); //inform components of updated search list
   movieSearchError = new Subject<boolean>();
 
-  //dummy movies for styling
+  //dummy movies for styling-------------
   dummy = [
     'the lighthouse',
     'one flew over',
@@ -19,6 +19,12 @@ export class MoviesService {
     'harry potter',
     'the matrix',
   ];
+  loadDummy() {
+    this.dummy.forEach((dummy) => {
+      this.getMovie(dummy);
+    });
+  }
+  //--------------------------------------
 
   constructor(private http: HttpClient) {}
 
@@ -58,17 +64,12 @@ export class MoviesService {
         },
         () => {
           console.log('completed!');
+          console.log(this.movieSearch);
         }
       );
   }
 
   getMovieSearch() {
     return this.movieSearch.slice();
-  }
-
-  loadDummy() {
-    this.dummy.forEach((dummy) => {
-      this.getMovie(dummy);
-    });
   }
 }
