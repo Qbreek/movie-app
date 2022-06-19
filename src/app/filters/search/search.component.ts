@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { OmdbService } from 'src/app/shared/omdbService.service';
 
 @Component({
@@ -7,13 +8,33 @@ import { OmdbService } from 'src/app/shared/omdbService.service';
   styleUrls: ['./search.component.sass'],
 })
 export class SearchComponent implements OnInit {
-  constructor(private omdbService: OmdbService) {}
+  searchMode: string = '';
+  constructor(private omdbService: OmdbService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        switch (event.url) {
+          case '/discover':
+            this.searchMode = 'discover';
+            break;
+          case '/watchlist':
+            this.searchMode = 'watchlist';
+            break;
+        }
+      }
+    });
+  }
 
   onSearchMovie(searchValue: string) {
-    if (searchValue.length > 0) {
-      this.omdbService.getMovie(searchValue);
+    switch (this.searchMode) {
+      case 'discover':
+        if (searchValue.length > 0) {
+          this.omdbService.getMovie(searchValue);
+        }
+        break;
+      case 'watchlist':
+        console.log('sir this is burger king');
     }
   }
 }
