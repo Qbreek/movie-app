@@ -1,25 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { MoviesService } from '../shared/movies.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.sass'],
 })
-export class ToolbarComponent implements OnInit, OnDestroy {
-  constructor(private moviesService: MoviesService) {}
-  sub: Subscription;
+export class ToolbarComponent implements OnInit {
+  constructor() {}
 
-  ngOnInit(): void {
-    // this.moviesService.loadDummy();
-  }
-
-  onSearchMovie(searchValue: string) {
-    if (searchValue.length > 0) {
-      this.moviesService.getMovie(searchValue);
-    }
-  }
-
-  ngOnDestroy(): void {}
+  ngOnInit(): void {}
 }
