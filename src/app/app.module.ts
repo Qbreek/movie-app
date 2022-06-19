@@ -30,6 +30,7 @@ import { FiltersComponent } from './filters/filters.component';
 
 //Pipes
 import { TrimOver20CharPipe } from './shared/trim-over20-char.pipe';
+import { ButtonsComponent } from './movie-item/buttons/buttons.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { TrimOver20CharPipe } from './shared/trim-over20-char.pipe';
     NavigationComponent,
     SearchComponent,
     FiltersComponent,
+    ButtonsComponent,
   ],
   imports: [
     BrowserModule,
