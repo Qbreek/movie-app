@@ -30,7 +30,8 @@ import { FiltersComponent } from './filters/filters.component';
 
 //Pipes
 import { TrimOver20CharPipe } from './shared/trim-over20-char.pipe';
-import { ButtonsComponent } from './movie-item/buttons/buttons.component';
+import { WatchlistButtonsComponent } from './movie-item/watchlist-buttons/watchlist-buttons.component';
+import { DiscoverButtonsComponent } from './movie-item/discover-buttons/discover-buttons.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ButtonsComponent } from './movie-item/buttons/buttons.component';
     NavigationComponent,
     SearchComponent,
     FiltersComponent,
-    ButtonsComponent,
+    WatchlistButtonsComponent,
+    DiscoverButtonsComponent,
   ],
   imports: [
     BrowserModule,
