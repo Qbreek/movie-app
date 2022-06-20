@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { OmdbService } from 'src/app/shared/omdbService.service';
+import { OmdbService } from 'src/app/shared/omdb.service';
 
 @Component({
   selector: 'app-search',
