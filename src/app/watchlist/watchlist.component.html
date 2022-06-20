@@ -1,6 +1,5 @@
 <app-movie-display>
-  <app-movie-item
-    *ngFor="let movie of watchlist"
-    [movie]="movie"
-  ></app-movie-item>
+  <app-movie-item *ngFor="let movie of watchlist" [movie]="movie">
+    <app-watchlist-buttons [id]="movie.fbID"></app-watchlist-buttons>
+  </app-movie-item>
 </app-movie-display>
