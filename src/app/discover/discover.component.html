@@ -1,9 +1,5 @@
 <app-movie-display>
-  <h2 *ngIf="searchList.length === 0">
-    Beging typing on the searchbar to discover your favorite movies!
-  </h2>
-  <app-movie-item
-    *ngFor="let movie of searchList"
-    [movie]="movie"
-  ></app-movie-item>
+  <app-movie-item *ngFor="let movie of searchList" [movie]="movie">
+    <app-discover-buttons [id]="movie.imbdbID"></app-discover-buttons>
+  </app-movie-item>
 </app-movie-display>
