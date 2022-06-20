@@ -30,4 +30,21 @@ export class WatchlistService {
         })
       );
   }
+
+  addToWatchlist(movie: Movie) {
+    this.http
+      .post<Movie>(
+        'https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/watchlist.json',
+        movie
+      )
+      .subscribe();
+  }
+
+  removeFromWatchlist(movieId: string) {
+    this.http
+      .delete(
+        `https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/watchlist/${movieId}.json`
+      )
+      .subscribe();
+  }
 }
