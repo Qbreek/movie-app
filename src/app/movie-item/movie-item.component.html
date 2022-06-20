@@ -17,17 +17,7 @@
         </span>
       </div>
       <mat-divider inset></mat-divider>
-      <mat-card-actions>
-        <button
-          mat-fab
-          matTooltip="Add to watchlist"
-          matTooltipPosition="right"
-          color="primary"
-          (click)="onAddToWatchlist()"
-        >
-          <mat-icon>movie</mat-icon>
-        </button>
-      </mat-card-actions>
+      <ng-content></ng-content>
     </div>
     <!--------------------Movie clicked----------------------------------->
     <div *ngIf="movieClicked" class="clicked" (click)="onMovieClicked()">
