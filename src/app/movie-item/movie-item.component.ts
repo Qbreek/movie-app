@@ -18,5 +18,7 @@ export class MovieItemComponent implements OnInit {
     this.movieClicked = !this.movieClicked; //switch card to showcase poster or details
   }
 
-  onAddToWatchlist() {}
+  onAddToWatchlist() {
+    console.log(this.movie);
+  }
 }
