@@ -28,7 +28,8 @@ export class OmdbService {
               omdbResponse.Director,
               omdbResponse.Actors,
               omdbResponse.imdbRating,
-              omdbResponse.Poster
+              omdbResponse.Poster,
+              omdbResponse.imdbID
             );
             return movie;
           } else {
@@ -52,5 +53,9 @@ export class OmdbService {
 
   getMovieSearch() {
     return this.movieSearch.slice();
+  }
+
+  getMovieByImdbID(id: string) {
+    return this.movieSearch.slice().find((movie) => movie.imbdbID === id);
   }
 }
