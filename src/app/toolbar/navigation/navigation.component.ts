@@ -11,7 +11,7 @@ export class NavigationComponent implements OnInit {
 
   links = ['Watchlist', 'Discover', 'Favorites', 'Archive'];
   icons = ['movie', 'explore', 'favorite', 'inventory_2'];
-  activeLink = this.links[1];
+  activeLink = this.links[0];
   background: ThemePalette = undefined;
 
   toggleBackground() {
