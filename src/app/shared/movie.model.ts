@@ -9,6 +9,7 @@ export class Movie {
     public actors: string,
     public rating: string,
     public poster: string,
+    public imbdbID: string,
     public fbID?: string
   ) {}
 }
