@@ -7,7 +7,7 @@ import { WatchlistComponent } from './watchlist/watchlist.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/discover',
+    redirectTo: '/watchlist',
     pathMatch: 'full',
   },
   { path: 'profile', component: ProfileComponent },
