@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+
 import { Movie } from '../shared/movie.model';
-import { OmdbService } from '../shared/omdbService.service';
+import { OmdbService } from '../shared/omdb.service';
 
 @Component({
   selector: 'app-discover',
@@ -18,7 +19,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
     this.searchList = this.omdbService.getMovieSearch(); // get session stored movie search querry
     this.movieSearchSubscription = // subscribe to changes on movie search in order to refresh page
       this.omdbService.movieSearchSuccessfullyCompleted.subscribe(() => {
-        this.searchList = this.omdbService.getMovieSearch();
+        this.searchList = this.omdbService.getMovieSearch(); // new movie search querry
       });
   }
 
