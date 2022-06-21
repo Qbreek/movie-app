@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WatchlistService } from 'src/app/shared/watchlist.service';
+import { map } from 'rxjs';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { Movie } from 'src/app/shared/movie.model';
 
 @Component({
   selector: 'app-watchlist-buttons',
@@ -7,13 +9,18 @@ import { WatchlistService } from 'src/app/shared/watchlist.service';
   styleUrls: ['./watchlist-buttons.component.sass'],
 })
 export class WatchlistButtonsComponent implements OnInit {
-  @Input() id: string;
-  constructor(private watchlistService: WatchlistService) {}
+  @Input() firebaseID: string;
+  @Input() imdbID: string;
+
+  constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {}
 
-  onRemoveFromWatchlistBtnClicked() {
-    console.log(this.id);
-    this.watchlistService.removeFromWatchlist(this.id);
+  onRemoveFromWatchlist(): void {
+    this.firebaseService.removeFromWatchlist(this.firebaseID);
+  }
+
+  onAddToArchive(): void {
+    this.firebaseService.moveFromWatchlistToArchive(this.firebaseID);
   }
 }
