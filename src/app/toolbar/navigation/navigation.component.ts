@@ -9,8 +9,8 @@ import { ThemePalette } from '@angular/material/core';
 export class NavigationComponent implements OnInit {
   constructor() {}
 
-  links = ['Watchlist', 'Discover', 'Favorites', 'Archive'];
-  icons = ['movie', 'explore', 'favorite', 'inventory_2'];
+  links = ['Watchlist', 'Discover', 'Archive'];
+  icons = ['movie', 'explore', 'inventory_2'];
   activeLink = this.links[0];
   background: ThemePalette = undefined;
 
