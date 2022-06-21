@@ -1,6 +1,9 @@
 <li>
   <mat-card>
     <!--------------------Movie not clicked------------------------------>
+    <div class="buttons" *ngIf="!movieClicked">
+      <ng-content></ng-content>
+    </div>
     <div *ngIf="!movieClicked" class="unclicked">
       <img
         [src]="movie.poster"
@@ -16,8 +19,6 @@
           {{ movie.rating }}
         </span>
       </div>
-      <mat-divider inset></mat-divider>
-      <ng-content></ng-content>
     </div>
     <!--------------------Movie clicked----------------------------------->
     <div *ngIf="movieClicked" class="clicked" (click)="onMovieClicked()">
