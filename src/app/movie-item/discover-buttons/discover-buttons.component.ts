@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OmdbService } from 'src/app/shared/omdb.service';
-import { WatchlistService } from 'src/app/shared/watchlist.service';
+import { OmdbService } from 'src/app/services/omdb.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-discover-buttons',
@@ -11,13 +11,13 @@ export class DiscoverButtonsComponent implements OnInit {
   @Input() id: string;
   constructor(
     private omdbService: OmdbService,
-    private watchlistService: WatchlistService
+    private firebaseService: FirebaseService
   ) {}
 
   ngOnInit(): void {}
 
   onAddToWatchlist() {
     let movie = this.omdbService.getMovieByImdbID(this.id);
-    this.watchlistService.addToWatchlist(movie);
+    this.firebaseService.addToWatchlist(movie);
   }
 }
