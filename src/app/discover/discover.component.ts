@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Movie } from '../shared/movie.model';
-import { OmdbService } from '../shared/omdb.service';
+import { OmdbService } from '../services/omdb.service';
 
 @Component({
   selector: 'app-discover',
