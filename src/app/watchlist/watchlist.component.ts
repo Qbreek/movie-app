@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Movie } from '../shared/movie.model';
-import { WatchlistService } from '../shared/watchlist.service';
-
+import { FirebaseService } from '../services/firebase.service';
 @Component({
   selector: 'app-watchlist',
   templateUrl: './watchlist.component.html',
@@ -11,14 +10,20 @@ import { WatchlistService } from '../shared/watchlist.service';
 export class WatchlistComponent implements OnInit, OnDestroy {
   watchlist: Movie[] = [];
   watchlistSubscription: Subscription;
-  constructor(private watchlistService: WatchlistService) {}
+  constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {
-    this.watchlistSubscription = this.watchlistService
+    this.watchlistSubscription = this.firebaseService
       .getWatchlist()
       .subscribe((response) => {
         this.watchlist = response;
       });
+
+    this.firebaseService.changeOccured.subscribe(() => {
+      this.firebaseService.getWatchlist().subscribe((res) => {
+        this.watchlist = res;
+      });
+    });
   }
 
   ngOnDestroy(): void {
