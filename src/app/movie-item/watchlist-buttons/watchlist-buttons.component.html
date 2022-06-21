@@ -1,16 +1,21 @@
 <div class="wrapper">
-  <button mat-fab matTooltip="Add to favorites" color="primary">
-    <mat-icon>favorite</mat-icon>
-  </button>
   <button
-    mat-fab
+    mat-icon-button
+    matTooltip="Add to archive"
+    matTooltipPosition="above"
+    color=""
+    (click)="onAddToArchive()"
+  >
+    <mat-icon>inventory_2</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
     matTooltip="Remove from watchlist"
+    matTooltipPosition="above"
     color="warn"
-    (click)="onRemoveFromWatchlistBtnClicked()"
+    (click)="onRemoveFromWatchlist()"
   >
     <mat-icon>delete</mat-icon>
-  </button>
-  <button mat-fab matTooltip="Add to archive" color="">
-    <mat-icon>inventory_2</mat-icon>
   </button>
 </div>
