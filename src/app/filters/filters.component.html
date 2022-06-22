@@ -1,9 +1,20 @@
 <mat-toolbar>
-  <div class="btn-wrapper">
-    <p>Sort by</p>
-    <button mat-stroked-button>Rating</button>
-    <button mat-stroked-button>Year</button>
-    <button mat-stroked-button>Duration</button>
+  <div class="wrapper">
+    <button mat-button [matMenuTriggerFor]="menu">
+      Sort by <mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="byRating()">Rating</button>
+      <button mat-menu-item (click)="byRelease()">Release Date</button>
+      <button mat-menu-item (click)="byRuntime()">Runtime</button>
+    </mat-menu>
+    <span>{{ appliedFilter }}</span>
   </div>
-  <app-search></app-search>
+  <div class="right-hand-items">
+    <app-search></app-search>
+    <button mat-button style="color: rgb(237, 153, 47)">
+      <mat-icon>account_circle</mat-icon>
+      <span>James</span>
+    </button>
+  </div>
 </mat-toolbar>
