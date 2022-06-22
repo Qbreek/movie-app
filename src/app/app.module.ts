@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
 
 //Component imports
 import { AppComponent } from './app.component';
@@ -24,14 +25,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MovieItemComponent } from './movie-item/movie-item.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MovieDisplayComponent } from './movie-display/movie-display.component';
-import { NavigationComponent } from './toolbar/navigation/navigation.component';
+import { NavigationComponent } from './navigation/navigation.component';
 import { SearchComponent } from './filters/search/search.component';
 import { FiltersComponent } from './filters/filters.component';
+import { WatchlistButtonsComponent } from './movie-item/watchlist-buttons/watchlist-buttons.component';
+import { DiscoverButtonsComponent } from './movie-item/discover-buttons/discover-buttons.component';
+import { ArchiveComponent } from './archive/archive.component';
 
 //Pipes
 import { TrimOver20CharPipe } from './shared/trim-over20-char.pipe';
-import { WatchlistButtonsComponent } from './movie-item/watchlist-buttons/watchlist-buttons.component';
-import { DiscoverButtonsComponent } from './movie-item/discover-buttons/discover-buttons.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { DiscoverButtonsComponent } from './movie-item/discover-buttons/discover
     FiltersComponent,
     WatchlistButtonsComponent,
     DiscoverButtonsComponent,
+    ArchiveComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,7 @@ import { DiscoverButtonsComponent } from './movie-item/discover-buttons/discover
     MatToolbarModule,
     MatTabsModule,
     MatTooltipModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
