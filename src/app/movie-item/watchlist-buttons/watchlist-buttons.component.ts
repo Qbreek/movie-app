@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { map } from 'rxjs';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { Movie } from 'src/app/shared/movie.model';
 
 @Component({
   selector: 'app-watchlist-buttons',
@@ -17,7 +15,7 @@ export class WatchlistButtonsComponent implements OnInit {
   ngOnInit(): void {}
 
   onRemoveFromWatchlist(): void {
-    this.firebaseService.removeFromWatchlist(this.firebaseID);
+    this.firebaseService.deleteMovie(this.firebaseID, 'watchlist');
   }
 
   onAddToArchive(): void {
