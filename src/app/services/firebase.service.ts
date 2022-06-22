@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Movie } from '../shared/movie.model';
-import { map, Subject } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,51 +11,42 @@ export class FirebaseService {
   constructor(private http: HttpClient) {}
 
   changeOccured = new Subject<boolean>();
+  sortOccured = new Subject<string>();
 
-  //watchlist methods
-  getWatchlist() {
+  // send get request to firebase
+  getMovies(path: string): Observable<Movie[]> {
     return this.http
       .get<{ key: string; obj: Movie }>(
-        'https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/watchlist.json'
+        `https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/${path}.json`
       )
       .pipe(
-        map((watchlistData) => {
-          let watchlistArray: Movie[] = [];
-          for (let key in watchlistData) {
+        map((firebaseData) => {
+          let movieArray: Movie[] = [];
+          for (let key in firebaseData) {
             const movie: Movie = {
-              ...watchlistData[key],
+              ...firebaseData[key],
               fbID: key,
             };
-            watchlistArray.push(movie);
+            movieArray.push(movie);
           }
-          return watchlistArray;
+          return movieArray; // create array to use in components
         })
       );
   }
 
-  addToWatchlist(movie: Movie) {
+  postMovie(movie: Movie, path: string) {
     this.http
       .post<Movie>(
-        'https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/watchlist.json',
+        `https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/${path}.json`,
         movie
       )
       .subscribe();
   }
 
-  removeFromWatchlist(firebaseID: string) {
-    this.http
-      .delete(
-        `https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/watchlist/${firebaseID}.json`
-      )
-      .subscribe(() => {
-        this.changeOccured.next(true);
-      });
-  }
-
-  getMovieFromWatchlist(firebaseID: string) {
+  getMovie(firebaseID: string, path: string) {
     return this.http
       .get(
-        `https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/watchlist/${firebaseID}.json`
+        `https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/${path}/${firebaseID}.json`
       )
       .pipe(
         map((movieData: Movie) => {
@@ -76,49 +67,41 @@ export class FirebaseService {
       );
   }
 
-  //archive methods
-  getArchive() {
-    return this.http
-      .get<{ key: string; obj: Movie }>(
-        'https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/archive.json'
-      )
-      .pipe(
-        map((archiveData) => {
-          let archiveArray: Movie[] = [];
-          for (let key in archiveData) {
-            const movie: Movie = {
-              ...archiveData[key],
-              fbID: key,
-            };
-            archiveArray.push(movie);
-          }
-          return archiveArray;
-        })
-      );
-  }
-
-  addToArchive(movie: Movie) {
-    this.http
-      .post<Movie>(
-        'https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/archive.json',
-        movie
-      )
-      .subscribe();
-  }
-
-  removeFromArchive(firebaseID: string) {
+  deleteMovie(firebaseID: string, path: string) {
     this.http
       .delete(
-        `https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/archive/${firebaseID}.json`
+        `https://movie-app-8f21c-default-rtdb.europe-west1.firebasedatabase.app/${path}/${firebaseID}.json`
       )
-      .subscribe();
+      .subscribe({
+        complete: () => {
+          this.changeOccured.next(true);
+        },
+      });
   }
 
-  //combined methods
+  // sort movies dynamically
+  sortMovies(filter: string, path: string) {
+    return this.getMovies(path).pipe(
+      map((movieArray) => {
+        return movieArray.sort((a, b) => {
+          if (a.hasOwnProperty(filter) && b.hasOwnProperty(filter)) {
+            if (a[filter] < b[filter]) {
+              return 1;
+            } else if (a[filter] > b[filter]) {
+              return -1;
+            }
+            return 0;
+          }
+        });
+      })
+    );
+  }
+
+  // TODO : replace with firebase function
   moveFromWatchlistToArchive(firebaseID: string) {
-    this.getMovieFromWatchlist(firebaseID).subscribe((movie: Movie) => {
-      this.addToArchive(movie);
-      this.removeFromWatchlist(firebaseID);
+    this.getMovie(firebaseID, 'watchlist').subscribe((movie: Movie) => {
+      this.postMovie(movie, 'archive');
+      this.deleteMovie(firebaseID, 'watchlist');
     });
   }
 }
