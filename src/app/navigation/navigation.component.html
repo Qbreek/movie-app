@@ -1,0 +1,12 @@
+<nav>
+  <mat-icon id="logo">polymer</mat-icon>
+  <a
+    *ngFor="let link of links; index as i"
+    (click)="activeLink = link"
+    [routerLink]="[link | lowercase]"
+    routerLinkActive="active"
+  >
+    <mat-icon style="color: white">{{ icons[i] }}</mat-icon>
+    <p>{{ link }}</p>
+  </a>
+</nav>
