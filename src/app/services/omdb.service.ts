@@ -7,7 +7,7 @@ import { Movie } from 'src/app/shared/movie.model';
 @Injectable({ providedIn: 'root' })
 export class OmdbService {
   private movieSearch: Movie[] = [];
-  movieSearchSuccessfullyCompleted = new Subject<boolean>(); //inform components of updated search list
+  movieSearchSuccessfullyCompleted = new Subject<boolean>(); // inform components of updated search list
 
   constructor(private http: HttpClient) {}
 
@@ -17,13 +17,13 @@ export class OmdbService {
       .get<any>(`http://www.omdbapi.com/?apikey=997675d2&t=${title}`)
       .pipe(
         map((omdbResponse) => {
-          const responseOK = omdbResponse.Response === 'True' ? true : false; //OMDB api responds to wrong searches with {Response : 'True' or 'False}
+          const responseOK = omdbResponse.Response === 'True' ? true : false; // OMDB api responds to wrong searches with {Response : 'True' or 'False}
           if (responseOK) {
             const movie = new Movie(
               omdbResponse.Title,
               omdbResponse.Plot,
               omdbResponse.Year,
-              omdbResponse.Runtime,
+              omdbResponse.Runtime.replace('min', ''),
               omdbResponse.Genre,
               omdbResponse.Director,
               omdbResponse.Actors,
