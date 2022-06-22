@@ -10,23 +10,38 @@ import { FirebaseService } from '../services/firebase.service';
 export class WatchlistComponent implements OnInit, OnDestroy {
   watchlist: Movie[] = [];
   watchlistSubscription: Subscription;
+  getSortedSub: Subscription;
+  changeOccuredSub: Subscription;
+
   constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {
     this.watchlistSubscription = this.firebaseService
-      .getWatchlist()
-      .subscribe((response) => {
-        this.watchlist = response;
+      .getMovies('watchlist')
+      .subscribe((firebaseWatchlist) => {
+        this.watchlist = firebaseWatchlist;
       });
 
-    this.firebaseService.changeOccured.subscribe(() => {
-      this.firebaseService.getWatchlist().subscribe((res) => {
-        this.watchlist = res;
-      });
+    this.changeOccuredSub = this.firebaseService.changeOccured.subscribe(() => {
+      this.firebaseService
+        .getMovies('watchlist')
+        .subscribe((firebaseWatchlist) => {
+          this.watchlist = firebaseWatchlist;
+        });
+    });
+
+    this.getSortedSub = this.firebaseService.sortOccured.subscribe((filter) => {
+      this.firebaseService
+        .sortMovies(filter, 'watchlist')
+        .subscribe((movieArray) => {
+          this.watchlist = movieArray;
+        });
     });
   }
 
   ngOnDestroy(): void {
     this.watchlistSubscription.unsubscribe();
+    this.changeOccuredSub.unsubscribe();
+    this.getSortedSub.unsubscribe();
   }
 }
