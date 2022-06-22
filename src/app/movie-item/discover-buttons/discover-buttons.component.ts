@@ -17,7 +17,7 @@ export class DiscoverButtonsComponent implements OnInit {
   ngOnInit(): void {}
 
   onAddToWatchlist() {
-    let movie = this.omdbService.getMovieByImdbID(this.id);
-    this.firebaseService.addToWatchlist(movie);
+    const movie = this.omdbService.getMovieByImdbID(this.id);
+    this.firebaseService.postMovie(movie, 'watchlist');
   }
 }
