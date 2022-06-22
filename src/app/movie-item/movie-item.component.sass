@@ -3,11 +3,13 @@
     flex-direction: column
     width: 250px
     height: 430px
-    background-color: #181818
-    transition: background-color 200ms linear
+    background-color: inherit
+    transition: background-color 500ms ease-in-out
+    border: none
+    box-shadow: none
 
 .mat-card:hover
-    background-color: #282828
+    background-color: rgb(43,48,60)
     .buttons
         visibility: visible
 
@@ -25,6 +27,7 @@
 .unclicked
     .mat-card-title
         padding-top: 15px
+        font-size: large
 
     img
         width: 250px
